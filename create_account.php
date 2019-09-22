@@ -1,8 +1,12 @@
 <?php
-	session_start();
-
-	if ($_POST['login'] && $_POST['passwd'] && ($_POST['admin'] == "0" || $_POST['admin'] == "1") && $_POST['submit'] && $_POST['submit'] === "OK") {
-		$account = unserialize(file_get_contents('./private/passwd'));
+	if ($_POST['login'] && $_POST['passwd'] && $S_POST['submit'] && $_POST['submit'] === "OK") {
+		if (!file_exists('../private')) {
+			mkdir('../private');
+		}
+		if (!file_exists('../private/passwd')) {
+			file_put_contents('../private/passwd', null);
+		}
+		$account = unserialize(file_get_contents('../private/passwd'));
 		$check = 0;
 		if ($account) {
 			foreach ($account as $k => $v) {
@@ -11,37 +15,18 @@
 			}
 		}
 		if ($check) {
-			echo "Login déjà utilisé";
+			echo "Login already used\n";
 		}
 		else {
-			if ($_POST['admin'] == "1" || $_POST['admin'] == "0") {
-				$tmp['login'] = $_POST['login'];
-				$tmp['passwd'] = hash('whirlpool', $_POST['passwd']);
-				$tmp['admin'] = $_POST['admin'];
-				$account[] = $tmp;
-				file_put_contents('./private/passwd', serialize($account));
-				header('Location: create_account2.php');
-			}
-			else
-				echo "Mauvaise choix d'admin (1 = oui ou 0 = non)";
+			$tmp['login'] = $_POST['login'];
+			$tmp['passwd'] = hash('whirlpool', $_POST['passwd']);
+			$account[] = $tmp;
+			file_put_contents('../private/passwd', serialize($account));
+			header('Location: create_account2.html');
 		}
 	}
+	else {
+		header('Location: create_account.html');
+		echo "ERROR\n";
+	}
 ?>
-
-<!DOCTYPE html>
-<html><head>
-	<meta charset="utf-8">
-	<title>Créer un utilisateur</title>
-</head>
-<body>
-	<form action="create_account.php" method="POST">
-		Identifiant : <input type="text" name="login" value="" />
-		<br />
-		Mot de Passe : <input type="password" name="passwd" value="" />
-		<br />
-		Admin ? (0 si non): <input type="text" name="admin" value="" />
-		<br />
-		<input type="submit" name="submit" value="OK" />
-	</form>
-</body>
-</html>

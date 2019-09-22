@@ -77,9 +77,7 @@
 
     if (file_exists("./private/products") == false)
         file_put_contents("./private/products", serialize(array()));
-
-
-	if ($_POST['title'] && $_POST['img'] && $_POST['price'] && $_POST['submit'] && $_POST['submit'] === "OK") {
+	if ($_POST['title'] && $_POST['price'] && $_POST['submit'] && $_POST['submit'] === "OK") {
 		$product = unserialize(file_get_contents('./private/products'));
 		$check = 0;
 		if ($product) {
@@ -92,9 +90,11 @@
 			echo "Product already exist";
         }
         else {
-            if (!preg_match('/[^A-Za-z0-9]/', $_POST['title']) && !preg_match('/[^0-9]/', $_POST['price'])){
+            var_dump($_FILES);
+            if (!preg_match('/[^A-Za-z0-9]/', $_POST['title']) && !preg_match('/[^0-9]/', $_POST['price']) && isset($_FILES['img']) && !empty($_FILES['img']['name'])){
                 $categories = fill_categories();
-                if (!$categories)
+                $resultat = move_uploaded_file($_FILES['img']['tmp_name'], "./private/img/".$_FILES['img']['name']);
+                if (!$categories || !$resultat)
                 {
                     echo "Categories invalid\n";
                     exit ;
@@ -102,19 +102,23 @@
                 $product[] = [
                     'name' => $_POST['title'],
                     'price' => $_POST['price'],
-                    'img' => $_POST['img'],
+                    'img' => $_FILES['img']['name'],
                     'categories' =>  $categories
                 ];
                 add_in_csv('./private/products', serialize($product));
                 echo "PRODUCT CREATED";
             }
             else 
+            {
+                var_dump($_FILES);
                 echo "Input not well formatted\n";
+
+            }
         }
 	}
 ?>
 
-<form method="POST" action="create_product.php">
+<form method="POST" action="create_product.php" enctype="multipart/form-data">
     Nom du produit: <input type="text" name="title"><br />
     Prix: <input type="text" name="price"><br />
     Fichier image: <input type="file" name="img"><br />

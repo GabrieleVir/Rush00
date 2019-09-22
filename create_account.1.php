@@ -26,7 +26,7 @@
 		}
 	}
 	else {
-		header('Location: create_account.html')
+		header('Location: create_account.html');
 		echo "ERROR\n";
 	}
 ?>
