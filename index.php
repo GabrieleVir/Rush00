@@ -40,12 +40,24 @@ var_dump($_SESSION);
 		?>
 
 		<?php		
-			if (isset($_SESSION['logged_on_user']))
+			if (isset($_SESSION['logged_on_user']) && $_SESSION['logged_on_user'] != "")
 			{
 		?>
 		<a href="delete_user.php">Delete</a>
 		<p> Welcome <?php echo $_SESSION['logged_on_user']; ?></p>
+		<a href="delete_user.php">Delete your account</a>
 
+		<?php
+			}
+		?>
+		<?php
+			if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1')
+			{
+		?>
+			<a href="create_product.php">Add product</a>
+			<a href="create_category.php">Add category</a>
+			<a href="delete_user.php">Delete users</a>
+			<a href="delete_user.php">Delete users</a>
 		<?php
 			}
 		?>
