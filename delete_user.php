@@ -11,14 +11,11 @@
 				if ($user['login'] == $_POST['login']) {
 					break;
 				}
-				echo "i : $i\n";
 				$i++;
 			}
-			array_splice($account, 0, 1);
-			var_dump($account);
-			echo "salut\n";
+			array_splice($account, $i, 1);
 			file_put_contents('./private/passwd', serialize($account));
-			/*header('Location: index.php');*/
+			header('Location: index.php');
 		}
 		else
 			echo "Tiens tiens tiens vous essayez de supprimer un autre utilisateur";
