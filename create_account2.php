@@ -1,10 +1,14 @@
+<?php
+	session_start();
+?>
+
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8">
-	<title>Login Created</title>
+	<title>Compte Créé</title>
 </head>
 <body>
-	Login Successfuly created
+	Compte Créé
 	<br />
 	<a href="index.php">Retour a la page d'accueil</a>
 </body>
