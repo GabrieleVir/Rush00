@@ -109,11 +109,7 @@
                 echo "PRODUCT CREATED";
             }
             else 
-            {
-                var_dump($_FILES);
                 echo "Input not well formatted\n";
-
-            }
         }
 	}
 ?>

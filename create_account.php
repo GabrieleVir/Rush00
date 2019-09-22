@@ -30,3 +30,24 @@
 		echo "ERROR\n";
 	}
 ?>
+
+
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+	<title>Créer un utilisateur</title>
+</head>
+<body>
+	<form action="create_account.php" method="POST">
+		Identifiant : <input type="text" name="login" value="" />
+		<br />
+		Mot de Passe : <input type="password" name="passwd" value="" />
+		<br />
+		Admin ? (0 si non): <input type="text" name="admin" value="" />
+		<br />
+		<input type="submit" name="submit" value="OK" />
+		<br />
+		<a href="index.php">Page d'accueil</a>
+	</form>
+</body>
+</html>
