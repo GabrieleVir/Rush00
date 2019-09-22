@@ -7,7 +7,6 @@ if (!file_exists('./private')) {
 if (!file_exists('./private/passwd')) {
 	file_put_contents('./private/passwd', null);
 }
-var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html><head>
@@ -23,6 +22,7 @@ var_dump($_SESSION);
 			.flex {
 				display: flex;
 				justify-content: space-evenly;
+				flex-wrap: wrap;
 			}
 		</style>
 </head>
@@ -30,7 +30,7 @@ var_dump($_SESSION);
 	<header class="flex ">
 		Salut tu veux tester quoi ? <br />
 		<?php		
-			if (!isset($_SESSION['logged_on_user']))
+			if (!isset($_SESSION['logged_on_user']) || $_SESSION['logged_on_user'] == "")
 			{
 		?>
 			<a href="login.php">Login</a><br />
@@ -43,7 +43,6 @@ var_dump($_SESSION);
 			if (isset($_SESSION['logged_on_user']) && $_SESSION['logged_on_user'] != "")
 			{
 		?>
-		<a href="delete_user.php">Delete</a>
 		<p> Welcome <?php echo $_SESSION['logged_on_user']; ?></p>
 		<a href="delete_user.php">Delete your account</a>
 
@@ -57,7 +56,10 @@ var_dump($_SESSION);
 			<a href="create_product.php">Add product</a>
 			<a href="create_category.php">Add category</a>
 			<a href="delete_user.php">Delete users</a>
-			<a href="delete_user.php">Delete users</a>
+			<a href="remove_product.php">Delete product</a>
+			<a href="remove_category.php">Delete category</a>
+			<a href="modif_product.php">Modif product</a>
+			<a href="modif_category.php">Modif category</a>
 		<?php
 			}
 		?>

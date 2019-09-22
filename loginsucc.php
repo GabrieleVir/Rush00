@@ -9,6 +9,5 @@
 <body>
 	Login réussi <br />
 	<a href="index.php">Page d'accueil</a><br />
-	<a href="login.php">Page de Login</a><br />
 </body>
 </html>

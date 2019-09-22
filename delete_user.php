@@ -15,11 +15,11 @@
 			}
 			array_splice($account, $i, 1);
 			file_put_contents('./private/passwd', serialize($account));
+			$_SESSION["logged_on_user"] = "";
 			header('Location: index.php');
 		}
 		else
 			echo "Tiens tiens tiens vous essayez de supprimer un autre utilisateur";
-			var_dump($_SESSION['admin']);
 	}
 ?>
 <!DOCTYPE html>

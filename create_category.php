@@ -27,7 +27,7 @@
 
     function add_in_csv($path_db, $serial_elem)
     {
-        $fp = fopen($path_db, "r");
+        $fp = fopen($path_db, "r+");
         if (flock($fp, LOCK_EX)) {
             file_put_contents($path_db, $serial_elem);
         }
@@ -43,8 +43,6 @@
 
     if (file_exists("./private/categories") == false)
         file_put_contents("./private/categories", serialize(array()));
-    var_dump($_POST);
-
 	if ($_POST && $_POST['name'] && $_POST['submit'] && $_POST['submit'] === "OK") {
 		$categories = unserialize(file_get_contents('./private/categories'));
         $check = 0;
@@ -72,5 +70,7 @@
     Category name: <input type="text" name="name">
     <input type ="submit" name="submit" value="OK">
 </form>
+
+<a href="index.php">Page d'accueil</a>
 
 <a href="create_product.php"> Create products </a>

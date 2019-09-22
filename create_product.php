@@ -90,7 +90,6 @@
 			echo "Product already exist";
         }
         else {
-            var_dump($_FILES);
             if (!preg_match('/[^A-Za-z0-9]/', $_POST['title']) && !preg_match('/[^0-9]/', $_POST['price']) && isset($_FILES['img']) && !empty($_FILES['img']['name'])){
                 $categories = fill_categories();
                 $resultat = move_uploaded_file($_FILES['img']['tmp_name'], "./private/img/".$_FILES['img']['name']);
@@ -121,3 +120,5 @@
     <?php echo checkbox_categories(); ?>
     <input type ="submit" name="submit" value="OK">
 </form>
+
+<a href="index.php">Page d'accueil</a>

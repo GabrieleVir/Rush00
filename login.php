@@ -2,6 +2,10 @@
 	require_once('auth_user.php');
 	require_once('is_in_csv.php');
 	
+	if ($_SESSION['logged_on_user'] != "")
+	{
+		header ("Location: index.php");
+	}
 
 	if ($_POST['login'] && $_POST['passwd']) {
 		if (auth_user($_POST['login'], $_POST['passwd'])) {
@@ -35,7 +39,7 @@
 	</form>
 	<a href="create_account.php">Créer un utilisateur</a><br />
 	<?php		
-			if (isset($_SESSION['logged_on_user']))
+			if (isset($_SESSION['admin']) && $_SESSION['admin'] == '1')
 			{
 		?>
 	<a href="delete_user.php">Supprimer un utilisateur</a><br />

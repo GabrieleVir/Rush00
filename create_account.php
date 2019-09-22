@@ -1,12 +1,12 @@
 <?php
-	if ($_POST['login'] && $_POST['passwd'] && $S_POST['submit'] && $_POST['submit'] === "OK") {
-		if (!file_exists('../private')) {
-			mkdir('../private');
+	if ($_POST['login'] && $_POST['passwd'] && $_POST['submit'] && $_POST['submit'] === "OK") {
+		if (!file_exists('./private')) {
+			mkdir('./private');
 		}
-		if (!file_exists('../private/passwd')) {
-			file_put_contents('../private/passwd', null);
+		if (!file_exists('./private/passwd')) {
+			file_put_contents('./private/passwd', null);
 		}
-		$account = unserialize(file_get_contents('../private/passwd'));
+		$account = unserialize(file_get_contents('./private/passwd'));
 		$check = 0;
 		if ($account) {
 			foreach ($account as $k => $v) {
@@ -20,14 +20,11 @@
 		else {
 			$tmp['login'] = $_POST['login'];
 			$tmp['passwd'] = hash('whirlpool', $_POST['passwd']);
+			$tmp['admin'] = $_POST['admin'];
 			$account[] = $tmp;
-			file_put_contents('../private/passwd', serialize($account));
-			header('Location: create_account2.html');
+			file_put_contents('./private/passwd', serialize($account));
+			header('Location: create_account2.php');
 		}
-	}
-	else {
-		header('Location: create_account.html');
-		echo "ERROR\n";
 	}
 ?>
 
