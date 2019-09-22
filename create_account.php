@@ -42,6 +42,8 @@
 		Admin ? (0 si non): <input type="text" name="admin" value="" />
 		<br />
 		<input type="submit" name="submit" value="OK" />
+		<br />
+		<a href="index.php">Page d'accueil</a>
 	</form>
 </body>
 </html>

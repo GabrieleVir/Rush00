@@ -19,6 +19,7 @@
 		}
 		else
 			echo "Tiens tiens tiens vous essayez de supprimer un autre utilisateur";
+			var_dump($_SESSION['admin']);
 	}
 ?>
 <!DOCTYPE html>
@@ -35,6 +36,7 @@
 		<br />
 		<input type="submit" name="submit" value="OK" />
 		<br />
+		<a href="index.php">Page d'accueil</a>
 	</form>
 </body>
 </html>

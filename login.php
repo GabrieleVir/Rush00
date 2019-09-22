@@ -8,10 +8,10 @@
 		if (auth_user($_POST['login'], $_POST['passwd'])) {
 			$_SESSION['logged_on_user'] = $_POST['login'];
 			if (is_in_csv('./private/passwd', '1', 'admin')) {
-				$_SESSION['admin'] == "1";
+				$_SESSION['admin'] = "1";
 			}
 			else
-				$_SESSION['admin'] == "0";
+				$_SESSION['admin'] = "0";
 			header('Location: loginsucc.php');
 		}
 		else {
@@ -36,5 +36,6 @@
 	</form>
 	<a href="create_account.php">Créer un utilisateur</a><br />
 	<a href="delete_user.php">Supprimer un utilisateur</a><br />
+	<a href="index.php">Page d'accueil</a>
 </body>
 </html>
