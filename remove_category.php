@@ -43,17 +43,12 @@ function is_in_csv($path_db, $elem_verif, $column)
     return (FALSE);
 }
 
-$_POST = [];
-
 if ($_SESSION['admin'] == '1')
 {
     if (isset($_POST) && $_POST['oldname'] != "" && $_POST['submit'] == "OK")
     {
         if (is_in_csv("./private/categories", $_POST['oldname'], 'name'))
         {
-            $fp = fopen("./private/categories", "r+");
-            if (flock($fp, LOCK_EX))
-            {
                 $categories = unserialize(file_get_contents("./private/categories"));
                 $i = 0;
                 foreach ($categories as $elem) {
@@ -63,13 +58,11 @@ if ($_SESSION['admin'] == '1')
                 }
                 array_splice($categories, $i, 1);
                 add_in_csv('./private/categories', serialize($categories));
-                flock($fp, LOCK_UN);
-                fclose($fp);
                 echo "DONE\n";
             }
         }
-        echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
-    }
+        else
+            echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
 }
 ?>
 

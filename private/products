@@ -1,1 +1,1 @@
-a:1:{i:0;a:4:{s:4:"name";s:4:"test";s:5:"price";s:5:"22555";s:3:"img";s:8:"42 2.png";s:10:"categories";a:2:{i:0;s:8:"Consoles";i:1;s:4:"Adam";}}}
+a:2:{i:0;a:4:{s:4:"name";s:5:"test2";s:5:"price";s:7:"1414141";s:3:"img";s:27:"afterglow-itermcolors-1.png";s:10:"categories";a:1:{i:0;s:8:"Consoles";}}i:1;a:4:{s:4:"name";s:4:"test";s:5:"price";s:3:"124";s:3:"img";s:8:"42 2.png";s:10:"categories";a:1:{i:0;s:5:" test";}}}

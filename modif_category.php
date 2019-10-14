@@ -49,13 +49,10 @@ if ($_SESSION['admin'] == '1')
     {
         if (is_in_csv("./private/categories", $_POST['oldname'], 'name'))
         {
-            $fp = fopen("./private/categories", "r+");
-            if (flock($fp, LOCK_EX))
-            {
                 $categories = unserialize(file_get_contents("./private/categories"));
                 $i = 0;
                 foreach ($categories as $elem) {
-                    if ($elem['name'] == $_POST['name'])
+                    if ($elem['name'] == $_POST['oldname'])
                         break ;
                     $i++;
                 }
@@ -64,13 +61,11 @@ if ($_SESSION['admin'] == '1')
                     'name' => $_POST['name'],
                 ];
                 add_in_csv('./private/categories', serialize($categories));
-                flock($fp, LOCK_UN);
-                fclose($fp);
                 echo "DONE\n";
             }
         }
-        echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
-    }
+        else
+            echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
 }
 ?>
 

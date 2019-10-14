@@ -1,19 +1,6 @@
 <?php
 session_start();
 
-
-function fill_categories()
-{
-    $categories = [];
-    foreach ($_POST["checkbox"] as $category_name)
-    {
-        if (!is_in_csv("./private/categories", $category_name, 'name'))
-            return (NULL);
-        $categories[] = $category_name;
-    }
-    return ($categories);
-}
-
 function checkbox_categories()
 {
     $fp = fopen("./private/categories", "r");
@@ -60,6 +47,20 @@ function is_in_csv($path_db, $elem_verif, $column)
     return (FALSE);
 }
 
+
+function fill_categories()
+{
+    $categories = [];
+    foreach ($_POST["checkbox"] as $category_name)
+    {
+        if (!is_in_csv("./private/categories", $category_name, 'name'))
+            return (NULL);
+        $categories[] = $category_name;
+    }
+    return ($categories);
+}
+
+
 function add_in_csv($path_db, $serial_elem)
 {
     $fp = fopen($path_db, "r+");
@@ -82,9 +83,6 @@ if ($_SESSION['admin'] == '1')
     {
         if (is_in_csv("./private/products", $_POST['oldname'], 'name'))
         {
-            $fp = fopen("./private/categories", "r+");
-            if (flock($fp, LOCK_EX))
-            {
                 $product = unserialize(file_get_contents("./private/products"));
                 $resultat = move_uploaded_file($_FILES['img']['tmp_name'], "./private/img/".$_FILES['img']['name']);
                 $i = 0;
@@ -102,14 +100,12 @@ if ($_SESSION['admin'] == '1')
                     'categories' =>  $categories
                 ];
                 add_in_csv('./private/products', serialize($product));
-                flock($fp, LOCK_UN);
-                fclose($fp);
                 echo "DONE\n";
                 exit ;
             }
         }
-        echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
-    }
+        else
+            echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
 }
 ?>
 

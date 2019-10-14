@@ -48,9 +48,6 @@ if ($_SESSION['admin'] == '1')
     {
         if (is_in_csv("./private/products", $_POST['oldname'], 'name'))
         {
-            $fp = fopen("./private/products", "r+");
-            if (flock($fp, LOCK_EX))
-            {
                 $product = unserialize(file_get_contents("./private/products"));
                 $i = 0;
                 foreach ($product as $elem) {
@@ -60,14 +57,12 @@ if ($_SESSION['admin'] == '1')
                 }
                 array_splice($product, $i, 1);
                 add_in_csv('./private/products', serialize($product));
-                flock($fp, LOCK_UN);
-                fclose($fp);
                 echo "DONE\n";
                 exit ;
             }
         }
-        echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
-    }
+        else
+            echo "IL FAUT REMPLIR TOUS LES CHAMPS MWHAHAHAHA\n";
 }
 ?>
 

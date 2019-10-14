@@ -65,8 +65,8 @@ if (!file_exists('./private/passwd')) {
 		?>
 	</header>
 	<section>
-		<iframe class="products" src="affichage.php">
-		<iframe src="panier.php">
+		<iframe class="products" src="affichage.php"></iframe>
+		<iframe src="panier.php" class="panier"></iframe>
 	</section>
 </body>
 </html>
